@@ -1,0 +1,123 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="w-full lg:w-[80%] h-m-screen mx-auto lg:ml-auto lg:mr-4 py-2 px-4">
+  <div>
+    <h1 class="text-xl font-bold">New Event</h1>
+  </div>
+  <form action="{% url 'events:add_event' %}" method="post">
+    {% csrf_token %} {{ form.non_field_errors }}
+    <div
+      class="w-full lg:w-3/4 border-2 border-[#DFD4C3] bg-slate-100 rounded-sm px-4 py-4 shadow-sm"
+    >
+      <div class="my-8 active:border-slate-300">
+        {{ form.title.errors }}
+        <label
+          for="{{ form.title.id_for_label }}"
+          class="text-lg font-bold mb-4"
+          >Title:
+        </label>
+        {{ form.title }}
+      </div>
+      <div class="my-8 w-full flex flex-col">
+        {{ form.description.errors }}
+        <label
+          for="{{ form.description.id_for_label }}"
+          class="text-lg font-bold mb-4"
+          >Description:
+        </label>
+        {{ form.description }}
+      </div>
+      <div class="my-8">
+        {{ form.start_date.errors }}
+        <label for="{{ form.start_date.id_for_label }}" class="text-lg font-bold mb-4"
+          >Start Date:
+        </label>
+        <div class="flex flex-col md:flex-row">{{ form.start_date }}</div>
+      </div>
+      <div class="my-8">
+        {{ form.end_date.errors }}
+        <label for="{{ form.end_date.id_for_label }}" class="text-lg font-bold mb-4"
+          >End Date:
+        </label>
+        <div class="flex flex-col md:flex-row">{{ form.end_date }}</div>
+      </div>
+
+      <div class="my-8 w-full flex flex-col">
+        {{ form.participants.errors }}
+        <label
+          for="{{ form.participants.id_for_label }}"
+          class="text-lg font-bold mb-4"
+          >
+          Participants
+          <span class="text-lg text-zinc-500 mb-2">
+             (This option is for restricted group events. Enter emails, separated by commas. You must set the privacy to group for this option to be activated):
+          </span>
+        </label>
+        {{ form.participants }}
+      </div>
+      <div class="my-8">
+        {{ form.privacy.errors }}
+        <label for="{{ form.privacy.id_for_label }}" class="block text-lg font-bold mb-4"
+          >Privacy:
+        </label>
+        {{ form.privacy }}
+      </div>
+      <div class="my-8 active:border-slate-300">
+        {{ form.anchor.errors }}
+        <label
+          for="{{ form.anchor.id_for_label }}"
+          class="text-lg font-bold mb-4"
+          >Name of Anchor, if necessary:
+        </label>
+        {{ form.anchor }}
+      </div>
+      <div class="my-8 w-full flex flex-col">
+        {{ form.speakers.errors }}
+        <label
+          for="{{ form.speakers.id_for_label }}"
+          class="text-lg font-bold mb-4"
+          >Optional Speakers (If necessary, enter one name per line):
+        </label>
+        {{ form.speakers }}
+      </div>
+      <div class="my-4 w-full">
+        {{ form.location.errors }}
+        <label
+          for="{{ form.location.id_for_label }}"
+          class="block text-lg font-bold mb-4"
+          >Location</label
+        >
+        {{ form.location }}
+      </div>
+      <div class="my-4 w-full">
+        {{ form.location_name.errors }}
+        <label
+          for="{{ form.location_name.id_for_label }}"
+          class="block text-lg font-bold mb-4"
+          >Location</label
+        >
+        {{ form.location_name }}
+      </div>
+      
+      <div class="my-4 w-full">
+        {{ form.event_status.errors }}
+        <label
+          for="{{ form.event_status.id_for_label }}"
+          class="block text-lg font-bold mb-4"
+          >Status</label
+        >
+        {{ form.event_status }}
+      </div>
+
+      <div class="my-8">
+        <input
+          class="w-auto bg-[#6a1385] text-white font-bold px-8 py-2 my-4"
+          type="submit"
+          value="Save"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

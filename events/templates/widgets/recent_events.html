@@ -1,0 +1,20 @@
+{% load format_post %} {% load static %} {% load bleach_tags %}
+<div class="w-full lg:w-1/2 mx-auto">
+  {% for event in events %}
+  <div class="bg-slate-200 border-2 border-slate-300 px-8 py-4 shadow-lg">
+    {% comment %} <img
+      class="blog-image"
+      src="{% get_media_prefix %}{{ event.FeatureImage }}"
+    /> {% endcomment %}
+    <div class="p-2">
+      <h1 class="title post-title">{{event.title}}</h1>
+      <p class="subtitle block">{{event.caption}}</p>
+      <p class="post-date block">{{event.date_created}}</p>
+      <p class="blog-excerpt">{{ event.Content|truncatechars:200|bleach }}</p>
+      <a href="/events/event/{{ event.id }}/{{ event.title|make_title }}/"
+        ><button class="btn btn-accent">Go to event...</button><br /><br
+      /></a>
+    </div>
+  </div>
+  {% endfor %}
+</div>

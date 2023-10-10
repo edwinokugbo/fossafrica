@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    {% include 'includes/header.html' %}
+    <body>
+        <header>
+        {% include 'includes/nav.html' %}
+        {% block header %}
+        {% endblock %}
+        </header>
+        <main>
+        {% block content %}
+        {% endblock %}
+        </main>
+        <footer>
+        {% include 'includes/footer.html' %}
+        </footer>
+    </body>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}" crossorigin="anonymous"></script>
+</html>

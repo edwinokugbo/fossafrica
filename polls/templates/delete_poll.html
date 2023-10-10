@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="{% url 'polls:del_poll' pk %}" method="POST">
+  {% csrf_token %}
+  <div class="w-full md:w-1/3 mx-auto py-8">
+    <p>Are you sure you want to delete this poll {{ poll.question_text }}?</p>
+    <input
+      type="submit"
+      value="Confirm"
+      class="bg-[#6a1385] text-xs text-white px-4 py-2 rounded-md"
+    />
+    <a href="{% url 'pages:home' %}"
+      ><p
+        class="w-full bg-slate-100 text-lg text-black mt-4 px-4 py-1 border-2 border-slate-400 rounded-md text-center"
+      >
+        Cancel
+      </p></a
+    >
+  </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="w-full lg:w-[80%] h-m-screen mx-auto lg:ml-auto lg:mr-4 py-2 px-4">
+  <div>
+    <h1 class="text-xl font-bold">New Post</h1>
+  </div>
+
+  <form
+    id="addpostform"
+    action="{% url 'blog:addpost' %}"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="flex flex-col lg:flex-row gap-2">
+      <div
+        class="w-full lg:w-3/4 border-2 border-[#DFD4C3] bg-white rounded-sm px-4 py-4 shadow-sm"
+      >
+        {% csrf_token %} {{ form.non_field_errors }}
+
+        <input type="hidden" name="Author" value="{{ user.id }}" />
+        <div class="my-8 active:border-slate-300">
+          {{ form.Title.errors }}
+          <label
+            for="{{ form.Title.id_for_label }}"
+            class="text-4xl font-bold mb-4"
+            >Title:
+          </label>
+          {{ form.Title }}
+        </div>
+        <div class="my-8">
+          {{ form.Subtitle.errors }}
+          <label for="{{ form.Subtitle.id_for_label }}" class="title"
+            >Sub Title (optional):
+          </label>
+          {{ form.Subtitle }}
+        </div>
+        <div class="w-full my-8 flex flex-col overflow-y-auto">
+          {{ form.Content.errors }}
+          <label
+            for="{{ form.Content.id_for_label }}"
+            class="text-2xl text-zinc-500 mb-2"
+            >Enter Content Here:
+          </label>
+          {{ form.Content|safe }}
+        </div>
+        <div class="my-8">
+          <input
+            class="w-auto bg-[#6a1385] text-white font-bold px-8 py-2 my-4"
+            type="submit"
+            value="Save"
+          />
+        </div>
+      </div>
+
+      {% comment %} left Side Bar {% endcomment %}
+      <div class="w-full lg:w-1/4 px-4 py-4 border-2 border-[#DFD4C3] bg-white">
+        <h3>Fields:</h3>
+        <div class="my-8">
+          {{ form.DateCreated.errors }}
+          <label for="{{ form.DateCreated.id_for_label }}" class="title"
+            >Date Created:
+          </label>
+          <div class="flex flex-col md:flex-row">{{ form.DateCreated }}</div>
+        </div>
+        <div class="my-8 overflow-x-auto">
+          {{ form.PostTags.errors }}
+          <label for="{{ form.PostTags.id_for_label }}" class="title block mb-2"
+            >Tags (optional):
+          </label>
+          {{ form.PostTags }}
+        </div>
+        <div class="my-8 overflow-x-auto">
+          {{ form.category.errors }}
+          <label for="{{ form.category.id_for_label }}" class="title block mb-2"
+            >Category (optional):
+          </label>
+          {{ form.category }}
+        </div>
+        <div class="my-8">
+          {{ form.FeatureImage.errors }}
+          <label
+            for="{{ form.FeatureImage.id_for_label }}"
+            class="title block mb-2"
+            >Featured Image:
+          </label>
+          <img
+            src="{{ FeaturedImage }}"
+            class="w-full border-2 border-slate-100"
+          />
+          {{ form.FeatureImage }}
+        </div>
+        <div class="my-4 w-full">
+          {{ form.PostStatus.errors }}
+          <label
+            for="{{ form.PostStatus.id_for_label }}"
+            class="title block mb-2"
+            >Status</label
+          >
+          {{ form.PostStatus }}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

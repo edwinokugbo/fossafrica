@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="w-full lg:w-[80%] h-m-screen mx-auto lg:ml-auto lg:mr-4 py-2 px-4">
+  <div>
+    <h1 class="text-xl font-bold">New Poll</h1>
+  </div>
+  <form action="{% url 'polls:add_poll' %}" method="post">
+    {% csrf_token %} {{ form.non_field_errors }}
+    <div
+      class="w-full lg:w-3/4 border-2 border-[#DFD4C3] bg-slate-100 rounded-sm px-4 py-4 shadow-sm"
+    >
+      <div class="my-8 active:border-slate-300">
+        {{ form.question_text.errors }}
+        <label
+          for="{{ form.question_text.id_for_label }}"
+          class="text-2xl font-bold mb-4"
+          >Question:
+        </label>
+        {{ form.question_text }}
+      </div>
+      <div class="my-8">
+        {{ form.privacy.errors }}
+        <label for="{{ form.privacy.id_for_label }}" class="text-lg block mb-2"
+          >Visibility:
+        </label>
+        {{ form.privacy }}
+      </div>
+      <div class="my-8 w-full flex flex-col">
+        {{ form.authorized_participants.errors }}
+        <label
+          for="{{ form.authorized_participants.id_for_label }}"
+          class="text-lg text-zinc-500 mb-2"
+          >Participants (for restricted group option. Enter emails, separated by
+          commas):
+        </label>
+        {{ form.authorized_participants }}
+      </div>
+      <div class="my-8">
+        {{ form.show_result.errors }}
+        <label
+          for="{{ form.show_result.id_for_label }}"
+          class="text-lg block mb-2"
+          >Show Result:
+        </label>
+        {{ form.show_result }}
+      </div>
+      <div class="my-8">
+        {{ form.pub_date.errors }}
+        <label for="{{ form.pub_date.id_for_label }}" class="title"
+          >Date Published:
+        </label>
+        <div class="flex flex-col md:flex-row">{{ form.pub_date }}</div>
+      </div>
+      <div class="my-4 w-full">
+        {{ form.poll_status.errors }}
+        <label
+          for="{{ form.poll_status.id_for_label }}"
+          class="title block mb-2"
+          >Status</label
+        >
+        {{ form.poll_status }}
+      </div>
+      <div class="my-8">
+        <input
+          class="w-auto bg-[#6a1385] text-white font-bold px-8 py-2 my-4"
+          type="submit"
+          value="Save"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

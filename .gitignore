@@ -1,0 +1,30 @@
+# Environment Folders
+
+venv/
+env/
+virtualenv/
+fossfaenv/
+media/
+
+# Migration Folders
+
+migrations/
+__pycache__/
+
+# Precompiled Binaries
+
+*.pyc
+
+# Backup Files
+
+*.swp
+*.tmp
+*.bak
+*.swo
+*.old
+*.env
+
+# Deployment files
+
+uwsgi.ini
+uwsgi_params

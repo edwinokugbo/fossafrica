@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load static %} {% load format_values %} {% block content %}
+<div class="w-full md:w-3/4 lg:w-1/2 mx-0 md:mx-auto px-4 lg:px-8 py-4">
+  <div class="bg-[#58507b28]">
+    <h2 class="text-[#58507B] text-xl lg:text-4xl text-center py-8">
+      {{ question.question_text }}
+    </h2>
+  </div>
+  {% for choice in choices %}
+  <div
+    class="flex flex-col lg:flex-row w-full h-fit bg-white border-2 border-slate-200 rounded-md shadow-lg mt-4 px-4 lg:px-6 py-2 lg:py-4"
+  >
+  <div class="w-full flex flex-col lg:flex-row justify-start lg:justify-between items-center gap-4">
+    <div class="w-full lg:w-3/4">
+      {% if choice.choice_img != '' %}
+      <img src="{% get_media_prefix %}{{ choice.choice_img }}" class="w-full md:w-[50%]"/>
+      {% endif %}
+      <h2 class="mt-2">{{ choice.choice_text }}</h2>
+      <div class="py-2">{{ choice.description }}</div>
+    </div>
+    <div class="w-full lg:w-1/4 flex justify-end">
+      <p
+      class="flex justify-center items-center w-16 h-16 bg-[#DFD4C3] border-4 border-[#dab681] rounded-full shadow-xl px-2 py-2 mt-4 mb-2"
+    >
+      <a href="{% url 'polls:vote_now' choice.id %}" class=""
+        >Vote</a
+      >
+    </p>
+    </div>
+  </div>
+  </div>
+  {% endfor %}
+
+  <div class="py-8 text-right">
+    <p>        
+      Poll created by
+      <span class="text-sm font-bold capitalize">{{ question.author }}</span> on {{ question.pub_date }}
+    </p>
+    <p>This poll is available to <span class="bg-[#58507b28] px-2 py-[4px] rounded-lg italic">{{ question.get_privacy_display }}</p></span>
+  </div>
+</div>
+{% endblock %}

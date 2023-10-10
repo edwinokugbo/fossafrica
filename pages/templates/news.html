@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+<div class="w-full lg:w-[90%] px-4 py-2 mx-auto">
+  <div class="py-4">
+    <h2 class="text-2xl">News</h2>
+  </div>
+  {% comment %}
+  <hr class="border-2 border-8late-200 py-2" />
+  {% endcomment %} {% include 'widgets/recent_news.html' %}
+</div>
+{% endblock %}
